@@ -2,6 +2,9 @@
 
 pragma solidity ^0.8;
 
+
+//solidity is case-sensetive language
+
 contract ownable{
     address public owner;
     constructor(){
