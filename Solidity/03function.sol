@@ -10,7 +10,7 @@ contract functionContract{
        
         return _x+_y;
     }
-
+    // Simple function cannot return a value
     function changeAge()public{
         age++;
     }
@@ -18,8 +18,11 @@ contract functionContract{
     function getAge() public view returns(uint){
         return age;
     }
-    function fun() internal {
-        
+    function fun() internal pure returns(uint) {
+        return 23;
+    }
+    function call() public pure returns(uint){
+        return fun();
     }
 }
 
