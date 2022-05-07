@@ -1,6 +1,6 @@
 /contracts
 /tests
 /scripts
-/.git
+.git
 /artifacts
 /Solidity/artifacts
