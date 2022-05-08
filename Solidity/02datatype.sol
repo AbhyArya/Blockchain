@@ -29,6 +29,13 @@ pragma solidity ^0.8;
         address public add = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
         bytes32 public b32;
         string str = "adsf";
+        int public typecast = int(uintTemp);//type casting
+
+        function Type() public view returns(string memory){
+                return type typecast;
+        }
+
+
     }
 
 
