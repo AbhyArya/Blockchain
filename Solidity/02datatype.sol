@@ -30,3 +30,22 @@ pragma solidity ^0.8;
         bytes32 public b32;
         string str = "adsf";
     }
+
+
+    // Visiblity
+        
+        // 1-> private 
+                // contrain in which it is
+        // 2-> internal  -> protected in c++
+                // contract in which it is and derived contract
+        // 3-> External  -> only for function it cannot be used for state variable
+                // not in contract in which it is and derived contract
+        // 4-> public
+                // anywhere
+        
+        
+        
+        //state variable is by default internal
+        //function is by default public in older version but in new version you have to provide visiblity there is no default value
+
+        // top-down gas cost increase and security decrease
