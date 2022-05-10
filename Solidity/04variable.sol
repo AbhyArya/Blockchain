@@ -14,8 +14,11 @@ contract variables{
     // salary = 5; // not allowed to initialize as this
 
     uint public constant mysallary = 13123123; 
-    constructor(){
+    uint public immutable id = 3425342;
+    uint public immutable id1;
+    constructor(uint _x){
         salary = 399;
+        id1 = _x;
     }
     function setSalary(uint _x) public returns(uint, bool){
         uint local = 6; // local variable   if you declare a local then you have to use in the function else if will gives an warning

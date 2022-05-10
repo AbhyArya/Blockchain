@@ -44,6 +44,6 @@ contract Require{
     function checkRequire(uint _x) public {
         age = _x;
         // require used for the error handling and validation
-        require(_x>2, "error message");// if give condition is false then error message is shown and function stop there and also revert back all the changes made my that function else execution coontinue
+        require(_x>2, "error message");// if given condition is false then error message is shown and function stop there and also revert back all the changes made my that function else execution coontinue
     }
 }
