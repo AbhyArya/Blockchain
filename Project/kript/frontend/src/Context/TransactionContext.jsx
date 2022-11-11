@@ -7,6 +7,7 @@ export const TransactionContext = React.createContext();
 
 const { ethereum } = window;
 
+
 const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
@@ -29,20 +30,15 @@ export const TransactionsProvider = ({ children }) => {
     try {
       if (ethereum) {
         const transactionsContract = createEthereumContract();
-
         const availableTransactions = await transactionsContract.getAllTransaction();
-
         const structuredTransactions = availableTransactions.map((transaction) => ({
           addressTo: transaction.receiver,
           addressFrom: transaction.sender,
-          timestamp: new Date(transaction.timestamp.toNumber() * 1000).toLocaleString(),
+          timestamp: new Date(transaction.timeStamp.toNumber()*1000).toLocaleString(),
           message: transaction.message,
           keyword: transaction.keyword,
           amount: parseInt(transaction.amount._hex) / (10 ** 18)
         }));
-
-        console.log(structuredTransactions);
-
         setTransactions(structuredTransactions);
       } else {
         console.log("Ethereum is not present");
@@ -60,7 +56,6 @@ export const TransactionsProvider = ({ children }) => {
 
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
-
         getAllTransactions();
       } else {
         console.log("No accounts found");
@@ -75,7 +70,6 @@ export const TransactionsProvider = ({ children }) => {
       if (ethereum) {
         const transactionsContract = createEthereumContract();
         const currentTransactionCount = await transactionsContract.getTransactionCount();
-
         window.localStorage.setItem("transactionCount", currentTransactionCount);
       }
     } catch (error) {
@@ -86,11 +80,11 @@ export const TransactionsProvider = ({ children }) => {
   };
 
   const connectWallet = async () => {
+
+    console.log("count");
     try {
       if (!ethereum) return alert("Please install MetaMask.");
-
       const accounts = await ethereum.request({ method: "eth_requestAccounts", });
-
       setCurrentAccount(accounts[0]);
       window.location.reload();
     } catch (error) {
@@ -120,13 +114,9 @@ export const TransactionsProvider = ({ children }) => {
         const transactionHash = await transactionsContract.addToBlockchain(addressTo, parsedAmount, message, keyword);
 
         setIsLoading(true);
-        console.log(`Loading - ${transactionHash.hash}`);
         await transactionHash.wait();
-        console.log(`Success - ${transactionHash.hash}`);
         setIsLoading(false);
-
         const transactionsCount = await transactionsContract.getTransactionCount();
-
         setTransactionCount(transactionsCount.toNumber());
         window.location.reload();
       } else {
